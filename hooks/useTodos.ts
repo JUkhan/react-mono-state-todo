@@ -8,6 +8,8 @@ import {
   ActionTypes
 } from "../states/appState";
 
+//useActionHandler and useStream are identical
+//they are actually same function but different names
 export const useTodos = () => {
   const [{ loading, data }] = useStream<Todo[], AppState>((action$, store) =>
     combineLatest([
