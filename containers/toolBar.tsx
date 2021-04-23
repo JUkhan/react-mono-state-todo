@@ -1,6 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector} from 'react-mono-state';
-import { ActionTypes, SearchCategory, AppState } from "../states/appState";
+import { SearchCategory } from "../states/appState";
 import { Link } from '../components/link';
 import { ActiveTodos } from '../components/activeTodos';
 

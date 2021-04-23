@@ -2,7 +2,6 @@ import React from 'react';
 import { map } from "rxjs/operators";
 import { useStream} from 'react-mono-state';
 import { ActionTypes, AppState } from "../states/appState";
-import {Link} from '../components/link';
 
 export const ActiveTodos=()=>{
 
