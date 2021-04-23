@@ -6,6 +6,8 @@ export const TodoList =() => {
   const todos = useTodos();
 
   return (
-    todos.map(todo=><Todo key={todo.id} todo={todo} />)
+     <React.Fragment>
+      {todos.map(todo => <Todo key={todo.id} todo={todo} />)}
+    </React.Fragment>
   );
 };

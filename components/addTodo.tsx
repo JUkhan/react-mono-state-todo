@@ -9,7 +9,7 @@ export const AddTodo = () => {
   const [description, setDescription] = useState('');
   const [isSearching, togglleSearching]=useState(false)
 
-  const [{data:isAdded}, toggle]=useActionHandler<boolean>( action$=>action$.whereType(ActionTypes.TODOS_ADDED).pipe(mapTo(true)));
+  const [{loading}, toggle]=useActionHandler<boolean>( action$=>action$.whereType(ActionTypes.TODOS_ADDED).pipe(mapTo(true)));
   
   function handleSubmit(e) {
     e.preventDefault();
@@ -17,9 +17,9 @@ export const AddTodo = () => {
     dispatch(ActionTypes.ADD_TODO, { completed: false, description });
   }
 
-  if(isAdded){
+  if(!loading){
     setDescription('');
-    toggle(false)
+   toggle({loading:true});
   }
   if(isSearching)
     dispatch(ActionTypes.SEARCH_INPUT, description);

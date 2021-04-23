@@ -9,11 +9,11 @@ export const UpdateTodo: FC<Todo> = ({ completed, description, id }) => {
   const [editable, setEditable]=useState(false);
   const [value, setDescription]=useState(description);
   const inputRef = useRef(null);
-  const [{data:isUpdated}, toggle]=useActionHandler<boolean>( action$ =>   action$.whereType(ActionTypes.TODOS_UPDATED).pipe(mapTo(true)));
+  const [{loading}, toggle]=useActionHandler<boolean>( action$ =>   action$.whereType(ActionTypes.TODOS_UPDATED).pipe(mapTo(true)));
 
-  if(isUpdated){
+  if(!loading){
     setEditable(false);
-    toggle(false);
+    toggle({loading:true});
   }
   
   function handleSubmit(e) {
