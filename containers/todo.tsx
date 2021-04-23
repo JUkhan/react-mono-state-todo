@@ -1,10 +1,10 @@
 import React, {FC} from "react";
 import { useDispatch } from 'react-mono-state';
-import { Todo } from "../states/appState";
+import { Todo as TodoModel } from "../states/appState";
 import { ActionTypes } from "../states/appState";
 import {UpdateTodo} from '../components/updateTodo'
 
-export const Todo:FC<{todo:Todo}> =({todo}) => {
+export const Todo:FC<{todo:TodoModel}> =({todo}) => {
   const dispatch = useDispatch();
   return (
     <div className="flex bg-white border p-2 justify-between">
