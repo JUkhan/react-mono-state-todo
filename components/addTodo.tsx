@@ -27,7 +27,7 @@ export const AddTodo = () => {
   useStoreEffect(action$ => action$.whereType(ActionTypes.SEARCH_INPUT).pipe(
         debounceTime(320),
         distinctUntilChanged(),
-        map(action => ({ type: ActionTypes.SEARCHING_TODOS, payload: action.payload }))
+        map(({payload}) => ({ type: ActionTypes.SEARCHING_TODOS, payload}))
     ));
 
   return (
