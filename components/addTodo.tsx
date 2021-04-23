@@ -9,7 +9,7 @@ export const AddTodo = () => {
   const [description, setDescription] = useState('');
   const [isSearching, togglleSearching]=useState(false)
 
-  const [{data:isAdded}, toggle]=useActionHandler<boolean>(action$=>action$.whereType(ActionTypes.TODOS_ADDED).pipe(mapTo(true)));
+  const [{data:isAdded}, toggle]=useActionHandler<boolean>( action$=>action$.whereType(ActionTypes.TODOS_ADDED).pipe(mapTo(true)));
   
   function handleSubmit(e) {
     e.preventDefault();

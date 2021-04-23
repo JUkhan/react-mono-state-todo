@@ -7,7 +7,8 @@ function btnClasses(isActive: boolean) {
 }
 export const Link:FC<{filter:SearchCategory}>=({filter, children})=>{
   const dispatch = useDispatch();
- const active=useSelector<AppState, SearchCategory>(state=>state.searchCategory);
+  const active=useSelector<AppState, SearchCategory>(    state=>state.searchCategory );
+  
   return (
     <button
           className={btnClasses(active === filter)}

@@ -1,5 +1,5 @@
 import React, { FC, useState, useRef } from "react";
-import { useDispatch, useStream } from 'react-mono-state';
+import { useDispatch, useActionHandler } from 'react-mono-state';
 import { mapTo } from "rxjs/operators";
 import { Todo } from "../states/appState";
 import { ActionTypes } from "../states/appState";
@@ -9,7 +9,7 @@ export const UpdateTodo: FC<Todo> = ({ completed, description, id }) => {
   const [editable, setEditable]=useState(false);
   const [value, setDescription]=useState(description);
   const inputRef = useRef(null);
-  const [{data:isUpdated}, toggle]=useStream<boolean>(action$=>action$.whereType(ActionTypes.TODOS_UPDATED).pipe(mapTo(true)));
+  const [{data:isUpdated}, toggle]=useActionHandler<boolean>( action$ =>   action$.whereType(ActionTypes.TODOS_UPDATED).pipe(mapTo(true)));
 
   if(isUpdated){
     setEditable(false);
