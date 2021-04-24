@@ -1,7 +1,7 @@
 import { RegisterState } from "react-mono-state";
-import { Todo, ActionTypes } from "../appState";
+import { Todo, ActionTypes } from "./appState";
 import { Observable } from "rxjs";
-import { addTodo, getTodos, removeTodo, updateTodo } from "../../services/api";
+import { addTodo, getTodos, removeTodo, updateTodo } from "../services/api";
 
 export const todos: RegisterState<Todo[]> = {
   stateName: "todos",
