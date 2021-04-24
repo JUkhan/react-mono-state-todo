@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import {Provider} from 'react-mono-state';
-import {store} from './states/reducers/createStore';
+import {store} from './states/store';
 import './style.css';
 import {TodosContainer} from './containers/todosContainer'
 
