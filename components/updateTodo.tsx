@@ -5,27 +5,27 @@ import { ActionTypes } from "../states/appState";
 
 export const UpdateTodo: FC<Todo> = ({ completed, description, id }) => {
   const dispatch = useDispatch();
-  const [editable, setEditable]=useState(false);
-  const [value, setDescription]=useState(description);
-  const inputRef = useRef(null);
-  const [{loading}, toggle]=useActionHandler<boolean>( action$ =>   action$.whereType(ActionTypes.TODOS_UPDATED));
+  const [editable, setEditable] = useState(false);
+  const [value, setDescription] = useState(description);
+  const inputRef = useRef(null as any);
+  const [{ loading }, toggle] = useActionHandler(action$ => action$.whereType(ActionTypes.TODOS_UPDATED));
 
-  if(!loading){
+  if (!loading) {
     setEditable(false);
-    toggle({loading:true});
-  }
-  
-  function handleSubmit(e) {
-    e.preventDefault();
-    dispatch(ActionTypes.UPDATE_TODO, { id, completed, description:value });
+    toggle({ loading: true });
   }
 
-  function doubleClickHandler(){
+  function handleSubmit(e: any) {
+    e.preventDefault();
+    dispatch(ActionTypes.UPDATE_TODO, { id, completed, description: value });
+  }
+
+  function doubleClickHandler() {
     setEditable(true);
-    setTimeout(()=>{
+    setTimeout(() => {
       inputRef.current.focus();
     })
-    
+
   }
 
   return (
@@ -38,14 +38,14 @@ export const UpdateTodo: FC<Todo> = ({ completed, description, id }) => {
       />
 
       {editable ? <form className="inline-block" onSubmit={handleSubmit}>
-      <input
-        className="ml-1 pl-2 border"
-        onBlur={() => setEditable(false)}
-        defaultValue={value}
-        onChange={e => setDescription(e.currentTarget.value)}
-        type="text"
-        ref={inputRef}
-      /></form>
+        <input
+          className="ml-1 pl-2 border"
+          onBlur={() => setEditable(false)}
+          defaultValue={value}
+          onChange={e => setDescription(e.currentTarget.value)}
+          type="text"
+          ref={inputRef}
+        /></form>
         :
         <span
           style={{ cursor: 'pointer' }}

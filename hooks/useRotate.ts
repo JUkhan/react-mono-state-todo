@@ -5,8 +5,8 @@ import { merge } from "rxjs";
 import { tween } from "../services/rxAnimationService";
 import { ActionTypes } from "../states/appState";
 
-export const useRotate = () => {
-  const [{ loading, data }] = useActionHandler<number>(action$ => {
+export const useRotate = (): number => {
+  const [{ loading, data }] = useActionHandler((action$) => {
     const start$ = action$.whereType(ActionTypes.SPINNING_START);
     const end$ = action$.whereType(ActionTypes.SPINNING_END);
     const error$ = action$.whereType(ActionTypes.TODOS_ERROR);
@@ -20,6 +20,6 @@ export const useRotate = () => {
       )
     );
   });
-  
-  return loading ? 0 : data;
+
+  return loading ? 0 : (data as any);
 };
