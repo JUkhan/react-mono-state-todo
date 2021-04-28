@@ -33,7 +33,7 @@ export const AddTodo = () => {
   return (
     <form onSubmit={handleSubmit} className="mb-4">
       <h1 className="text-grey-darkest">Todo List</h1>
-      <div className="flex flex mt-4">
+      <div className="flex mt-4">
         <input
           className="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
           type="text"
