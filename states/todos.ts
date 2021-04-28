@@ -41,7 +41,7 @@ export const todos: RegisterState<Todo[]> = {
 
 function callApi<T>(
   stream: Observable<T>,
-  dispatch: (type: string, payload?: string) => void,
+  dispatch: (type: string|symbol, payload?: string) => void,
   resCallback: (data: T) => void
 ): void {
   dispatch(ActionTypes.SPINNING_START);
