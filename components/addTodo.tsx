@@ -30,7 +30,7 @@ export const AddTodo = () => {
       dispatch(ActionTypes.SEARCH_INPUT, description);
   }
 
-  // catch searcch_input action and debounce input for 320ms and dispatch searching_todos action that actually 
+  // catch search_input action and debounce input for 320ms and dispatch searching_todos action that actually 
   // notify useTodos hook to perform search operation.
   useStoreEffect(action$ => action$.whereType(ActionTypes.SEARCH_INPUT).pipe(
     debounceTime(320),
