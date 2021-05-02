@@ -14,13 +14,13 @@ export const todos: RegisterState<Todo[]> = {
         });
       },
       [ActionTypes.ADD_TODO](state, action) {
-        callApi(addTodo(action.payload), dispatch, (todo) => {
+        callApi(addTodo(action.payload), dispatch, (todo:Todo) => {
           emit([...state, todo]);
           dispatch(ActionTypes.TODOS_ADDED);
         });
       },
       [ActionTypes.UPDATE_TODO](state, action) {
-        callApi(updateTodo(action.payload), dispatch, (updatedtodo) => {
+        callApi(updateTodo(action.payload), dispatch, (updatedtodo:Todo) => {
           emit(
             state.reduce((acc: Todo[], todo) => {
               acc.push(todo.id === updatedtodo.id ? updatedtodo : todo);
