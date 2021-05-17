@@ -1,5 +1,5 @@
 import React, { FC, useState, useRef } from "react";
-import { useDispatch, useActionHandler } from 'react-mono-state';
+import { useDispatch, useNotifier } from 'react-mono-state';
 import { Todo } from "../states/appState";
 import { ActionTypes } from "../states/appState";
 import { Input } from './input';
@@ -8,14 +8,13 @@ export const UpdateTodo: FC<Todo> = ({ completed, description, id }) => {
   const dispatch = useDispatch();
   const [editable, setEditable] = useState(false);
   const [value, setDescription] = useState(description);
-  const [{ loading }, toggle] = useActionHandler(action$ => action$.whereType(ActionTypes.TODOS_UPDATED));
-
+  
   //when updated successfully
-  if (!loading) {
-    setEditable(false);
-    toggle({ loading: true });
-  }
+  useNotifier(action$ => action$.whereType(ActionTypes.TODOS_UPDATED),()=>{
+     setEditable(false);
+  });
 
+ 
   function handleSubmit(description: string) {
     dispatch(ActionTypes.UPDATE_TODO, { id, completed, description });
   }

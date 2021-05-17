@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { useDispatch, useActionHandler, useStoreEffect } from "react-mono-state";
+import { useDispatch, useNotifier, useMonoEffect } from "react-mono-state";
 import { ActionTypes } from "../states/appState";
 import { Input } from './input';
+
 
 export const AddTodo = () => {
 
@@ -10,7 +11,10 @@ export const AddTodo = () => {
   const [description, setDescription] = useState('');
   const [isSearching, togglleSearching] = useState(false)
 
-  const [{ loading }, toggle] = useActionHandler(action$ => action$.whereType(ActionTypes.TODOS_ADDED));
+  //when added successfully
+  useNotifier(action$ => action$.whereType(ActionTypes.TODOS_ADDED),()=>{
+     setDescription('');
+  });
 
   function handleSubmit(description: string) {
     setDescription(description)
@@ -18,11 +22,6 @@ export const AddTodo = () => {
       dispatch(ActionTypes.ADD_TODO, { completed: false, description });
   }
 
-  //when added successfully
-  if (!loading) {
-    setDescription('');
-    toggle({ loading: true })
-  }
 
   //dispatch search_input action
   function changeHandler(description: string) {
@@ -32,7 +31,7 @@ export const AddTodo = () => {
 
   // catch search_input action and debounce input for 320ms and dispatch searching_todos action that actually 
   // notify useTodos hook to perform search operation.
-  useStoreEffect(action$ => action$.whereType(ActionTypes.SEARCH_INPUT).pipe(
+  useMonoEffect(action$ => action$.whereType(ActionTypes.SEARCH_INPUT).pipe(
     debounceTime(320),
     distinctUntilChanged(),
     map(({ payload }) => ({ type: ActionTypes.SEARCHING_TODOS, payload }))
